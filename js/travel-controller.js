@@ -140,11 +140,14 @@ function renderLocations(locations) {
     const strHtmls = locations.map((location, idx) => `<tr>
 <td>${idx + 1}</td>
 <td>${location.name}</td>
-<td>X</td>
+<td data-id="${location.id}" class"delete-btn">X</td>
 </tr>`).join('');
 
     elTbody.innerHTML = strHtmls;
 }
 
+document.querySelector('.location-body').addEventListener('click',(ev) => {
+    console.log(ev)
+})
 
 
