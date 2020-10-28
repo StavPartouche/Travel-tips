@@ -30,7 +30,8 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
     panTo(35.6895, 139.6917);
 })
 
-document.querySelector('.my-location').addEventListener('click', () =>{
+document.querySelector('.my-location').addEventListener('click', (ev) =>{
+    ev.preventDefault()
     initMap()
         .then(() => {
 
