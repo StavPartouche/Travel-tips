@@ -6,7 +6,9 @@ export const mapService = {
     getLocs,
     splitCoord,
     saveLocation,
-    deleteLocation
+    deleteLocation,
+    getStringCoords,
+    getWeather,
 };
 
 const LOC_KEY = 'locationsDB';
@@ -42,6 +44,19 @@ function deleteLocation(id) {
 function generateID() {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
+
+function getStringCoords(str) {
+    var newStr = str.split(' ').join('+');
+    return Promise.resolve(axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${newStr}&key=AIzaSyDnYKkDmrXVOTwEesvKZsshzGBSx7GmY4c`)
+        .then(res => res.data.results[0].geometry.location))
+        .catch(console.log('Oops! No locations found!'));
+}
+
+function getWeather(lat, lng) {
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=101ac678798cc9cfe82700a564f2661c`)
+        .then(res => console.log(res.data))
+}
+
 
 
 

@@ -6,12 +6,9 @@ console.log('Main!');
 
 mapService.getLocs()
     .then(locs => console.log('locs', locs));
-
 window.onload = () => {
-
     mapService.getLocs()
         .then(renderLocations);
-
     getPosition()
         .then(res => initMap(res.coords.latitude, res.coords.longitude))
         .catch(err => {
@@ -26,7 +23,7 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     var inputVal = (document.querySelector('.main-input').value) ? document.querySelector('.main-input').value : 'no where';
     document.querySelector('.location-name span').innerText = inputVal;
-    getStringCoords(inputVal)
+    mapService.getStringCoords(inputVal)
         .then(res => {
             mapService.saveLocation(res.lat, res.lng, inputVal);
             return panTo(res.lat, res.lng);
@@ -73,31 +70,6 @@ export function initMap(lat, lng) {
         });
 }
 
-function addMarker(loc) {
-    var marker = new google.maps.Marker({
-        position: loc,
-        map: gMap,
-        title: 'Hello World!'
-    });
-
-    gMarkers.push(marker);
-    return marker;
-}
-
-function clearMarkers() {
-    setMapOnAll(null);
-}
-
-function setMapOnAll(gMap) {
-    for (let i = 0; i < gMarkers.length; i++) {
-        gMarkers[i].setMap(gMap);
-    }
-}
-
-function deleteMarkers() {
-    gMarkers = [];
-    clearMarkers();
-}
 
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
@@ -128,18 +100,6 @@ function _connectGoogleApi() {
     });
 }
 
-function getStringCoords(str) {
-    var newStr = str.split(' ').join('+');
-    return Promise.resolve(axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${newStr}&key=AIzaSyDnYKkDmrXVOTwEesvKZsshzGBSx7GmY4c`)
-        .then(res => res.data.results[0].geometry.location))
-        .catch(console.log('Oops! No locations found!'));
-}
-
-function getWeather(lat, lng) {
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=101ac678798cc9cfe82700a564f2661c`)
-        .then(res => console.log(res.data));
-}
-
 function renderLocations(locations) {
     const elTbody = document.querySelector('.location-body');
     const strHtmls = locations.map((location, idx) => `<tr>
@@ -152,14 +112,36 @@ function renderLocations(locations) {
 
     document.querySelectorAll('.delete-btn').forEach(button =>
         button.addEventListener('click', (ev) => {
-            console.log(ev.target.dataset.id);
-            mapService.deleteLocation(ev.target.dataset.id);
+            console.log(ev.target.dataset.id)
 
-            mapService.getLocs()
-                .then(renderLocations);
         })
     );
 }
 
+function addMarker(loc) {
+    var marker = new google.maps.Marker({
+        position: loc,
+        map: gMap,
+        title: 'Hello World!'
+    });
+
+    gMarkers.push(marker);
+    return marker;
+}
+
+function clearMarkers() {
+    setMapOnAll(null);
+}
+
+function setMapOnAll(gMap) {
+    for (let i = 0; i < gMarkers.length; i++) {
+        gMarkers[i].setMap(gMap);
+    }
+}
+
+function deleteMarkers() {
+    gMarkers = [];
+    clearMarkers();
+}
 
 
