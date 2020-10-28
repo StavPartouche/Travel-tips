@@ -9,12 +9,12 @@ export const mapService = {
 }
 
 const LOC_KEY = 'locationsDB';
-var glocs = (storageService.LoadFromLocalStorage(LOC_KEY)) ? storageService.LoadFromLocalStorage(LOC_KEY) : [];
+var gLocs = (storageService.LoadFromLocalStorage(LOC_KEY)) ? storageService.LoadFromLocalStorage(LOC_KEY) : [];
 
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(locs);
+            resolve(gLocs);
         }, 2000);
     });
 }

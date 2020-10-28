@@ -20,9 +20,10 @@ window.onload = () => {
 document.querySelector('.go-location').addEventListener('click', (ev) => {
     ev.preventDefault();
     console.log('Aha!', ev.target);
-    var inputVal = document.querySelector('.main-input').value;
+    var inputVal = (document.querySelector('.main-input').value) ? document.querySelector('.main-input').value : 'no where';
     getStringCoords(inputVal)
-    .then(res => panTo(res.lat, res.lng))
+        .then(res => panTo(res.lat, res.lng))
+        .catch(console.log('No Such Location'))
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
 });
@@ -51,9 +52,9 @@ export function initMap(lat, lng) {
             });
             gMap.addListener('click', function (mapsMouseEvent) {
                 console.log(mapsMouseEvent);
-                var latLng = mapsMouseEvent.latLng.toString()
-                var coords = mapService.splitCoord(latLng)
-                addMarker({lat: coords[0], lng: coords[1]})
+                var latLng = mapsMouseEvent.latLng.toString();
+                var coords = mapService.splitCoord(latLng);
+                addMarker({ lat: coords[0], lng: coords[1] });
                 console.log(coords);
             });
             console.log('Map!', gMap);
@@ -116,15 +117,23 @@ function _connectGoogleApi() {
     });
 }
 
-function getStringCoords(str){
-    var newStr = str.split(' ').join('+')
+function getStringCoords(str) {
+    var newStr = str.split(' ').join('+');
     return Promise.resolve(axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${newStr}&key=AIzaSyDnYKkDmrXVOTwEesvKZsshzGBSx7GmY4c`)
-            .then(res =>res.data.results[0].geometry.location))
+        .then(res => res.data.results[0].geometry.location))
+        .catch(console.log('Oops! No locations found!'));
 }
 
-getStringCoords('paris')
+function renderLocations(locations) {
+    const elTbody = document.querySelector('.location-body');
+    const strHtmls = locations.map((location, idx) => `<tr>
+<td>${idx + 1}</td>
+<td>${location.name}</td>
+<td>X</td>
+</tr>`).join('');
 
-
+    elTbody.innerHTML = strHtmls;
+}
 
 
 

@@ -17,6 +17,10 @@ header {
     text-align: center;
 }
 
+table{
+    font-size: 1.5rem;
+}
+
 button {
     color: white;
     margin: 0;
