@@ -21,14 +21,19 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
     ev.preventDefault();
     console.log('Aha!', ev.target);
     var inputVal = document.querySelector('.main-input').value;
+    document.querySelector('.location-name span').innerText = inputVal
     getStringCoords(inputVal)
-    .then(res => panTo(res.lat, res.lng))
+    .then(res => {
+        mapService.saveLocation(res.lat, res.lng, inputVal)
+        return panTo(res.lat, res.lng)
+    })
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
 });
 
 document.querySelector('.my-location').addEventListener('click', (ev) => {
     ev.preventDefault();
+    document.querySelector('.location-name span').innerText = 'Your Location'
     getPosition()
         .then(res => initMap(res.coords.latitude, res.coords.longitude))
         .catch(err => {
