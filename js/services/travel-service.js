@@ -5,7 +5,7 @@ import { storageService } from './storage-service.js';
 export const mapService = {
     getLocs,
     splitCoord,
-
+    saveLocation
 }
 
 const LOC_KEY = 'locationsDB';
@@ -15,7 +15,7 @@ function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(gLocs);
-        }, 2000);
+        }, 1000);
     });
 }
 
@@ -29,7 +29,7 @@ function splitCoord(coordStr) {
 function saveLocation(lat, lng, name) {
     const locObj = { lat, lng, name, id: generateID(), createdAt: Date.now() };
     gLocs.push(locObj);
-    storageService.saveToLocalStorage(gLocs)
+    storageService.saveToLocalStorage(LOC_KEY, gLocs)
 }
 
 function generateID() {

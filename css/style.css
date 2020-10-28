@@ -17,8 +17,12 @@ header {
     text-align: center;
 }
 
-table{
+table {
     font-size: 1.5rem;
+}
+
+td, th{
+    border:1px dashed thistle;
 }
 
 button {
@@ -43,11 +47,11 @@ input {
 }
 
 h2 {
-    font-weight: 400;
+    font-weight: 600;
 }
 
 span {
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .container {
@@ -70,15 +74,15 @@ span {
 }
 
 .aside>* {
-    flex-grow: 1;
+    flex-basis: 50%;
 }
 
-.weather{
+.weather {
     background-color: thistle;
     margin-bottom: 15px;
 }
 
-.location-table{
+.location-table {
     background: rgb(182, 142, 142);
 }
 
