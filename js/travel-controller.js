@@ -34,7 +34,7 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
 
-    mapService.getLocs()
+        mapService.getLocs()
         .then(renderLocations);
 });
 
@@ -135,9 +135,9 @@ function getStringCoords(str) {
         .catch(console.log('Oops! No locations found!'));
 }
 
-function getWeather(lat, lng){
+function getWeather(lat, lng) {
     axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=101ac678798cc9cfe82700a564f2661c`)
-            .then(res => console.log(res.data))
+        .then(res => console.log(res.data));
 }
 
 function renderLocations(locations) {
@@ -152,8 +152,11 @@ function renderLocations(locations) {
 
     document.querySelectorAll('.delete-btn').forEach(button =>
         button.addEventListener('click', (ev) => {
-            console.log(ev.target.dataset.id)
-            
+            console.log(ev.target.dataset.id);
+            mapService.deleteLocation(ev.target.dataset.id);
+
+            mapService.getLocs()
+                .then(renderLocations);
         })
     );
 }
