@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="main-header">
+    <header class="main-header container flex space-between align-center">
       <h1 class="logo">TravelTip</h1>
       <form class="location-form">
         <input type="text" name="" id="" placeholder="Enter Location" />
@@ -15,15 +15,15 @@
         <button class="my-location">My Location</button>
       </form>
     </header>
-    <main>
-      <section class="curr-location">
+    <main class="main-content container flex column ">
+      <section class="curr-location flex space-between">
         <h2 class="location-name"><span>Location:</span> Some, Text</h2>
         <button class="copy-location">Copy Location</button>
       </section>
-      <section class="location-info">
-        <aside class="aside">
-          <div class="weather"></div>
-          <div class="location-table"></div>
+      <section class="location-info flex">
+        <aside class="aside flex-column">
+          <div class="weather">weather</div>
+          <div class="location-table">table</div>
         </aside>
         <div id="map" style="width: 400px; height: 400px;"></div>
       </section>
