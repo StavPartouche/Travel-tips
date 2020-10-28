@@ -22,8 +22,10 @@ table {
     border-collapse: collapse;
 }
 
-table, td, th{
-    border:1px dashed thistle;
+table,
+td,
+th {
+    border: 1px dashed thistle;
     padding: 5px;
 }
 
@@ -40,7 +42,8 @@ button {
 }
 
 input {
-    border: none;
+    border: 1px solid rgba(155, 155, 155, 0.568);
+    outline: none;
     font-size: 1rem;
     padding: 1rem;
     background-color: rgb(231, 231, 231);
@@ -89,9 +92,9 @@ span {
     padding: 10px;
 }
 
-.location-table > table{
-padding: 5px;
-} 
+.location-table>table {
+    padding: 5px;
+}
 
 .curr-location {
     padding: 1.3rem 0;
@@ -103,7 +106,7 @@ padding: 5px;
     display: flex;
 }
 
-.flex.just-center{
+.flex.just-center {
     justify-content: center;
 }
 

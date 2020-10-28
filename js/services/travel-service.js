@@ -18,7 +18,7 @@ function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(gLocs);
-        }, 1000);
+        }, 100);
     });
 }
 
@@ -37,7 +37,8 @@ function saveLocation(lat, lng, name) {
 
 function deleteLocation(id) {
     const currLocIdx = gLocs.findIndex(loc => loc.id === id);
-    gLocs(currLocIdx, 1);
+    gLocs.splice(currLocIdx, 1);
+    storageService.saveToLocalStorage(LOC_KEY, gLocs);
 }
 
 function generateID() {

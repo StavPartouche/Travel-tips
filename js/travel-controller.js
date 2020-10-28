@@ -31,7 +31,7 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
 
-    mapService.getLocs()
+        mapService.getLocs()
         .then(renderLocations);
 });
 
