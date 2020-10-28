@@ -4,8 +4,9 @@ import { storageService } from './storage-service.js';
 
 export const mapService = {
     getLocs,
-    splitCoord
-};
+    splitCoord,
+
+}
 
 const LOC_KEY = 'locationsDB';
 var glocs = (storageService.LoadFromLocalStorage(LOC_KEY)) ? storageService.LoadFromLocalStorage(LOC_KEY) : [];
@@ -34,4 +35,6 @@ function saveLocation(lat, lng, name) {
 function generateID() {
     return '_' + Math.random().toString(36).substr(2, 9);
 }
+
+
 
