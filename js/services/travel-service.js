@@ -1,6 +1,7 @@
 export const mapService = {
     getLocs,
-    splitCoord
+    splitCoord,
+
 }
 
 var locs = [{ lat: 11.22, lng: 22.11 }]
@@ -19,5 +20,7 @@ function splitCoord(coordStr) {
     var lng = parseFloat(latlngStr[1]);
     return [lat, lng]
 }
+
+
 
 

@@ -20,7 +20,9 @@ window.onload = () => {
 document.querySelector('.go-location').addEventListener('click', (ev) => {
     ev.preventDefault();
     console.log('Aha!', ev.target);
-    panTo(35.6895, 139.6917)
+    var inputVal = document.querySelector('.main-input').value;
+    getStringCoords(inputVal)
+    .then(res => panTo(res.lat, res.lng))
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
 });
@@ -114,6 +116,12 @@ function _connectGoogleApi() {
     });
 }
 
+function getStringCoords(str){
+    var newStr = str.split(' ').join('+')
+    return Promise.resolve(axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${newStr}&key=AIzaSyDnYKkDmrXVOTwEesvKZsshzGBSx7GmY4c`)
+            .then(res =>res.data.results[0].geometry.location))
+}
 
+getStringCoords('paris')
 
 
