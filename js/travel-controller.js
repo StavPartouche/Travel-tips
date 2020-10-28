@@ -35,10 +35,6 @@ document.querySelector('.my-location').addEventListener('click', (ev) => {
         .catch(console.log('INIT MAP ERROR'));
 });
 
-// map.addListener('click', function (mapsMouseEvent) {
-//     console.log(mapsMouseEvent);
-// });
-
 export function initMap(lat, lng) {
     console.log(lat, lng);
     console.log('InitMap');
@@ -99,12 +95,12 @@ function _connectGoogleApi() {
     });
 }
 
-function splitCoord(coordStr) {
-    var latlngStr = coordStr.split(",", 2);
-    var lat = parseFloat(latlngStr[0].substring(1));
-    var lng = parseFloat(latlngStr[1]);
-    return [lat, lng]
-}
+// function splitCoord(coordStr) {
+//     var latlngStr = coordStr.split(",", 2);
+//     var lat = parseFloat(latlngStr[0].substring(1));
+//     var lng = parseFloat(latlngStr[1]);
+//     return [lat, lng]
+// }
 
 
 
