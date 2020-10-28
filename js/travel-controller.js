@@ -1,56 +1,44 @@
-import { mapService } from './services/travel-service.js'
+import { mapService } from './services/travel-service.js';
 
 var gMap;
 console.log('Main!');
 
 mapService.getLocs()
-    .then(locs => console.log('locs', locs))
+    .then(locs => console.log('locs', locs));
 
 window.onload = () => {
-    initMap()
-        .then(() => {
-
-            addMarker({ lat: 32.0749831, lng: 34.9120554 });
-        })
-        .catch(console.log('INIT MAP ERROR'));
-
     getPosition()
-        .then(pos => {
-
-            console.log('User position is:', pos.coords);
-        })
+        .then(res => initMap(res.coords.latitude, res.coords.longitude))
         .catch(err => {
             console.log('err!!!', err);
         })
-}
+        .then(addMarker)
+        .catch(console.log('INIT MAP ERROR'));
+
+};
 
 document.querySelector('.go-location').addEventListener('click', (ev) => {
-    ev.preventDefault()
+    ev.preventDefault();
     console.log('Aha!', ev.target);
     panTo(35.6895, 139.6917);
-})
+});
 
-document.querySelector('.my-location').addEventListener('click', (ev) =>{
-    ev.preventDefault()
-    initMap()
-        .then(() => {
-
-            addMarker({ lat: 32.0749831, lng: 34.9120554 });
-        })
-        .catch(console.log('INIT MAP ERROR'));
-
+document.querySelector('.my-location').addEventListener('click', (ev) => {
+    ev.preventDefault();
     getPosition()
-        .then(pos => {
-
-            console.log('User position is:', pos.coords);
-        })
+        .then(res => initMap(res.coords.latitude, res.coords.longitude))
         .catch(err => {
             console.log('err!!!', err);
         })
-})
+        .then(addMarker)
+        .catch(console.log('INIT MAP ERROR'));
 
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+});
+
+
+export function initMap(lat, lng) {
+    console.log(lat, lng);
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
@@ -59,9 +47,10 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
-            })
+            });
             console.log('Map!', gMap);
-        })
+            return { lat, lng };
+        });
 }
 
 function addMarker(loc) {
@@ -82,13 +71,13 @@ function getPosition() {
     console.log('Getting Pos');
 
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    })
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
 }
 
 
 function _connectGoogleApi() {
-    if (window.google) return Promise.resolve()
+    if (window.google) return Promise.resolve();
     const API_KEY = 'AIzaSyDnYKkDmrXVOTwEesvKZsshzGBSx7GmY4c';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
@@ -97,8 +86,8 @@ function _connectGoogleApi() {
 
     return new Promise((resolve, reject) => {
         elGoogleApi.onload = resolve;
-        elGoogleApi.onerror = () => reject('Google script failed to load')
-    })
+        elGoogleApi.onerror = () => reject('Google script failed to load');
+    });
 }
 
 
