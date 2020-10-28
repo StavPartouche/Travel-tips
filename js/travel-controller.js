@@ -10,7 +10,15 @@ window.onload = () => {
     mapService.getLocs()
         .then(renderLocations);
     getPosition()
-        .then(res => initMap(res.coords.latitude, res.coords.longitude))
+        .then(res => {
+            mapService.getWeather(res.coords.latitude, res.coords.longitude)
+                .then(res => {
+                    document.querySelector('.weather-location').innerText = `${res.name}, ${res.sys.country} ${res.weather[0].main}`
+                    document.querySelector('.temperature span').innerText = `${res.main.temp_min} to ${res.main.temp_max}`
+                    document.querySelector('.wind span').innerText = res.wind.speed
+                })
+            return initMap(res.coords.latitude, res.coords.longitude)
+        })
         .catch(err => {
             console.log('err!!!', err);
         })
@@ -28,6 +36,12 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
             mapService.saveLocation(res.lat, res.lng, inputVal);
             mapService.getLocs()
                 .then(renderLocations);
+            mapService.getWeather(res.lat, res.lng)
+                .then(res => {
+                    document.querySelector('.weather-location').innerText = `${res.name}, ${res.sys.country} ${res.weather[0].main}`
+                    document.querySelector('.temperature span').innerText = `${res.main.temp_min} to ${res.main.temp_max}`
+                    document.querySelector('.wind span').innerText = res.wind.speed
+                })
             return panTo(res.lat, res.lng);
         })
         .then(addMarker)
@@ -39,7 +53,15 @@ document.querySelector('.my-location').addEventListener('click', (ev) => {
     ev.preventDefault();
     document.querySelector('.location-name span').innerText = 'Your Location';
     getPosition()
-        .then(res => initMap(res.coords.latitude, res.coords.longitude))
+        .then(res => {
+            mapService.getWeather(res.coords.latitude, res.coords.longitude)
+                .then(res => {
+                    document.querySelector('.weather-location').innerText = `${res.name}, ${res.sys.country} ${res.weather[0].main}`
+                    document.querySelector('.temperature span').innerText = `${res.main.temp_min} to ${res.main.temp_max}`
+                    document.querySelector('.wind span').innerText = res.wind.speed
+                })
+            return initMap(res.coords.latitude, res.coords.longitude)
+        })
         .catch(err => {
             console.log('err!!!', err);
         })
@@ -66,7 +88,7 @@ export function initMap(lat, lng) {
                 console.log(coords);
             });
             console.log('Map!', gMap);
-            return { lat, lng };
+            return Promise.resolve({ lat, lng });
         });
 }
 
