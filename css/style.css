@@ -1,0 +1,41 @@
+/* Basic-Elements */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+/* Classes */
+
+.aside{
+    background-color: crimson;
+}
+
+/* Helpers */
+
+.flex {
+    display: flex;
+}
+
+.flex.column {
+    flex-direction: column;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
