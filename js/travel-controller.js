@@ -20,7 +20,9 @@ window.onload = () => {
 document.querySelector('.go-location').addEventListener('click', (ev) => {
     ev.preventDefault();
     console.log('Aha!', ev.target);
-    panTo(35.6895, 139.6917);
+    panTo(35.6895, 139.6917)
+        .then(addMarker)
+        .catch(console.log('INIT MAP ERROR'));
 });
 
 document.querySelector('.my-location').addEventListener('click', (ev) => {
@@ -65,6 +67,7 @@ function addMarker(loc) {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
+    return Promise.resolve({ lat, lng });
 }
 
 function getPosition() {
