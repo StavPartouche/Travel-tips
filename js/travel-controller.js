@@ -50,7 +50,7 @@ export function initMap(lat, lng) {
             gMap.addListener('click', function (mapsMouseEvent) {
                 console.log(mapsMouseEvent);
                 var latLng = mapsMouseEvent.latLng.toString()
-                var coords = splitCoord(latLng)
+                var coords = mapService.splitCoord(latLng)
                 console.log(coords);
             });
             console.log('Map!', gMap);
