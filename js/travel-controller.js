@@ -135,6 +135,10 @@ function getStringCoords(str) {
         .catch(console.log('Oops! No locations found!'));
 }
 
+function getWeather(lat, lng){
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&APPID=101ac678798cc9cfe82700a564f2661c`)
+}
+
 function renderLocations(locations) {
     const elTbody = document.querySelector('.location-body');
     const strHtmls = locations.map((location, idx) => `<tr>
