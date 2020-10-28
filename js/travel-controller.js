@@ -24,9 +24,28 @@ window.onload = () => {
         })
 }
 
-document.querySelector('.btn').addEventListener('click', (ev) => {
+document.querySelector('.go-location').addEventListener('click', (ev) => {
+    ev.preventDefault()
     console.log('Aha!', ev.target);
     panTo(35.6895, 139.6917);
+})
+
+document.querySelector('.my-location').addEventListener('click', () =>{
+    initMap()
+        .then(() => {
+
+            addMarker({ lat: 32.0749831, lng: 34.9120554 });
+        })
+        .catch(console.log('INIT MAP ERROR'));
+
+    getPosition()
+        .then(pos => {
+
+            console.log('User position is:', pos.coords);
+        })
+        .catch(err => {
+            console.log('err!!!', err);
+        })
 })
 
 
@@ -80,6 +99,7 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
 
 
 
