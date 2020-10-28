@@ -1,6 +1,7 @@
 import { mapService } from './services/travel-service.js';
 
 var gMap;
+var gMarkers = [];
 console.log('Main!');
 
 mapService.getLocs()
@@ -63,7 +64,24 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     });
+
+    gMarkers.push(marker);
     return marker;
+}
+
+function clearMarkers() {
+    setMapOnAll(null);
+}
+
+function setMapOnAll(gMap) {
+    for (let i = 0; i < gMarkers.length; i++) {
+        gMarkers[i].setMap(gMap);
+    }
+}
+
+function deleteMarkers() {
+    gMarkers = [];
+    clearMarkers();
 }
 
 function panTo(lat, lng) {
