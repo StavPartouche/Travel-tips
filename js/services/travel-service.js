@@ -5,8 +5,9 @@ import { storageService } from './storage-service.js';
 export const mapService = {
     getLocs,
     splitCoord,
-    saveLocation
-}
+    saveLocation,
+    deleteLocation
+};
 
 const LOC_KEY = 'locationsDB';
 var gLocs = (storageService.LoadFromLocalStorage(LOC_KEY)) ? storageService.LoadFromLocalStorage(LOC_KEY) : [];
@@ -29,7 +30,12 @@ function splitCoord(coordStr) {
 function saveLocation(lat, lng, name) {
     const locObj = { lat, lng, name, id: generateID(), createdAt: Date.now() };
     gLocs.push(locObj);
-    storageService.saveToLocalStorage(LOC_KEY, gLocs)
+    storageService.saveToLocalStorage(LOC_KEY, gLocs);
+}
+
+function deleteLocation(id) {
+    const currLocIdx = gLocs.findIndex(loc => loc.id === id);
+    gLocs(currLocIdx, 1);
 }
 
 function generateID() {

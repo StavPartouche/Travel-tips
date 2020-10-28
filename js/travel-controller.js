@@ -145,14 +145,18 @@ function renderLocations(locations) {
     const strHtmls = locations.map((location, idx) => `<tr>
 <td>${idx + 1}</td>
 <td>${location.name}</td>
-<td data-id="${location.id}" class"delete-btn">X</td>
+<td data-id="${location.id}" class="delete-btn">X</td>
 </tr>`).join('');
 
     elTbody.innerHTML = strHtmls;
+
+    document.querySelectorAll('.delete-btn').forEach(button =>
+        button.addEventListener('click', (ev) => {
+            console.log(ev.target.dataset.id)
+            
+        })
+    );
 }
 
-document.querySelector('.location-body').addEventListener('click',(ev) => {
-    console.log(ev)
-})
 
 
