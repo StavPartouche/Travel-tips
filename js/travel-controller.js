@@ -32,9 +32,22 @@ document.querySelector('.my-location').addEventListener('click', (ev) => {
         })
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
-
-
 });
+
+// gMap.addEventListener('click', function (mapsMouseEvent) {
+//     console.log(mapsMouseEvent);
+//     var locationName = prompt('enter location name')
+//     if(!locationName) return
+//     var latLng = mapsMouseEvent.latLng.toString()
+//     var coords = splitCoord(latLng)
+//     console.log(coords);
+//     var location = {
+//         id: makeId(),
+//         name: locationName,
+//         lat: coords[0],
+//         lng: coords[1]
+//     }
+// });
 
 
 export function initMap(lat, lng) {
