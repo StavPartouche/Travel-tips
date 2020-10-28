@@ -6,7 +6,8 @@ console.log('Main!');
 
 mapService.getLocs()
     .then(locs => console.log('locs', locs));
-window.onload = () => {
+window.onload = (ev) => {
+    console.log(ev)
     mapService.getLocs()
         .then(renderLocations);
     getPosition()
