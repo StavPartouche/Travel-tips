@@ -3,23 +3,83 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
     margin: 0;
+    background-color: rgb(251, 250, 216);
 }
 
 header {
     text-align: center;
 }
 
+button {
+    color: white;
+    margin: 0;
+    outline: none;
+    background-color: gray;
+    border: 1px solid rgba(155, 155, 155, 0.568);
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+input {
+    border: none;
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: rgb(231, 231, 231);
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+span {
+    font-weight: 600;
+}
+
 .container {
     padding: 20px;
     margin: 0 auto;
+    width: 100%;
 }
 
 /* Classes */
 
-.aside{
-    background-color: crimson;
+.go-location {
+    margin-right: 10px;
+}
+
+.aside {
+    text-align: center;
+    flex-grow: 1;
+    font-size: 2em;
+    margin-right: 1.5rem;
+}
+
+.aside>* {
+    flex-grow: 1;
+}
+
+.weather{
+    background-color: thistle;
+    margin-bottom: 15px;
+}
+
+.location-table{
+    background: rgb(182, 142, 142);
+}
+
+.curr-location {
+    padding: 1.3rem 0;
 }
 
 /* Helpers */
