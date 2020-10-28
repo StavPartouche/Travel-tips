@@ -14,7 +14,6 @@ window.onload = () => {
         })
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
-
 };
 
 document.querySelector('.go-location').addEventListener('click', (ev) => {
@@ -36,21 +35,9 @@ document.querySelector('.my-location').addEventListener('click', (ev) => {
         .catch(console.log('INIT MAP ERROR'));
 });
 
-// gMap.addEventListener('click', function (mapsMouseEvent) {
+// map.addListener('click', function (mapsMouseEvent) {
 //     console.log(mapsMouseEvent);
-//     var locationName = prompt('enter location name')
-//     if(!locationName) return
-//     var latLng = mapsMouseEvent.latLng.toString()
-//     var coords = splitCoord(latLng)
-//     console.log(coords);
-//     var location = {
-//         id: makeId(),
-//         name: locationName,
-//         lat: coords[0],
-//         lng: coords[1]
-//     }
 // });
-
 
 export function initMap(lat, lng) {
     console.log(lat, lng);
@@ -62,6 +49,12 @@ export function initMap(lat, lng) {
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
+            });
+            gMap.addListener('click', function (mapsMouseEvent) {
+                console.log(mapsMouseEvent);
+                var latLng = mapsMouseEvent.latLng.toString()
+                var coords = splitCoord(latLng)
+                console.log(coords);
             });
             console.log('Map!', gMap);
             return { lat, lng };
@@ -106,6 +99,12 @@ function _connectGoogleApi() {
     });
 }
 
+function splitCoord(coordStr) {
+    var latlngStr = coordStr.split(",", 2);
+    var lat = parseFloat(latlngStr[0].substring(1));
+    var lng = parseFloat(latlngStr[1]);
+    return [lat, lng]
+}
 
 
 
