@@ -136,7 +136,8 @@ function getStringCoords(str) {
 }
 
 function getWeather(lat, lng){
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&APPID=101ac678798cc9cfe82700a564f2661c`)
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=101ac678798cc9cfe82700a564f2661c`)
+            .then(res => console.log(res.data))
 }
 
 function renderLocations(locations) {
