@@ -26,13 +26,13 @@ document.querySelector('.go-location').addEventListener('click', (ev) => {
     mapService.getStringCoords(inputVal)
         .then(res => {
             mapService.saveLocation(res.lat, res.lng, inputVal);
+            mapService.getLocs()
+                .then(renderLocations);
             return panTo(res.lat, res.lng);
         })
         .then(addMarker)
         .catch(console.log('INIT MAP ERROR'));
-
-        mapService.getLocs()
-        .then(renderLocations);
+    document.querySelector('.main-input').value = '';
 });
 
 document.querySelector('.my-location').addEventListener('click', (ev) => {
@@ -112,8 +112,9 @@ function renderLocations(locations) {
 
     document.querySelectorAll('.delete-btn').forEach(button =>
         button.addEventListener('click', (ev) => {
-            console.log(ev.target.dataset.id)
-
+            mapService.deleteLocation(ev.target.dataset.id);
+            mapService.getLocs()
+                .then(renderLocations);
         })
     );
 }
