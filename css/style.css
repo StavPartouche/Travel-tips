@@ -19,10 +19,12 @@ header {
 
 table {
     font-size: 1.5rem;
+    border-collapse: collapse;
 }
 
-td, th{
+table, td, th{
     border:1px dashed thistle;
+    padding: 5px;
 }
 
 button {
@@ -84,7 +86,12 @@ span {
 
 .location-table {
     background: rgb(182, 142, 142);
+    padding: 10px;
 }
+
+.location-table > table{
+padding: 5px;
+} 
 
 .curr-location {
     padding: 1.3rem 0;
@@ -94,6 +101,10 @@ span {
 
 .flex {
     display: flex;
+}
+
+.flex.just-center{
+    justify-content: center;
 }
 
 .flex.column {
