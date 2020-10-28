@@ -51,6 +51,7 @@ export function initMap(lat, lng) {
                 console.log(mapsMouseEvent);
                 var latLng = mapsMouseEvent.latLng.toString()
                 var coords = mapService.splitCoord(latLng)
+                addMarker({lat: coords[0], lng: coords[1]})
                 console.log(coords);
             });
             console.log('Map!', gMap);
@@ -112,13 +113,6 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load');
     });
 }
-
-// function splitCoord(coordStr) {
-//     var latlngStr = coordStr.split(",", 2);
-//     var lat = parseFloat(latlngStr[0].substring(1));
-//     var lng = parseFloat(latlngStr[1]);
-//     return [lat, lng]
-// }
 
 
 
